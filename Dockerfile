@@ -18,7 +18,7 @@ RUN apt update \
 RUN apt update && apt -y -o 'Dpkg::Options::=--force-confdef' -o 'Dpkg::Options::=--force-confold' --no-install-recommends install wget ca-certificates unzip && rm -rf /var/lib/apt/lists/*
 
 # Install binary
-RUN wget ${URL} -O- | unzip --include='miner' -O > /root/miner \
+RUN wget ${URL} -O temp.zip && unzip temp.zip -d /root/miner \
     && chmod 0755 /root/ && chmod 0755 /root/miner
 
 # Workaround GMiner not finding libnvml
