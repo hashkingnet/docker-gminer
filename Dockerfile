@@ -1,11 +1,11 @@
 FROM debian:stretch
 
-MAINTAINER Adam Cecile <acecile@le-vert.net>
+MAINTAINER hashluck <hashluck@hashluck.net>
 
 ENV TERM xterm
 ENV HOSTNAME bminer-cuda.local
 ENV DEBIAN_FRONTEND noninteractive
-ENV URL https://github.com/develsoftware/GMinerRelease/releases/download/1.36/gminer_1_36_minimal_linux64.tar.xz
+ENV URL https://github.com/develsoftware/GMinerRelease/releases/download/2.44/gminer_2_44_linux64.zip
 
 WORKDIR /root
 
@@ -15,10 +15,10 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
-RUN apt update && apt -y -o 'Dpkg::Options::=--force-confdef' -o 'Dpkg::Options::=--force-confold' --no-install-recommends install wget ca-certificates bsdtar && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt -y -o 'Dpkg::Options::=--force-confdef' -o 'Dpkg::Options::=--force-confold' --no-install-recommends install wget ca-certificates unzip && rm -rf /var/lib/apt/lists/*
 
 # Install binary
-RUN wget ${URL} -O- | bsdtar -xvf- --include='miner' -O > /root/miner \
+RUN wget ${URL} -O- | unzip- --include='miner' -O > /root/miner \
     && chmod 0755 /root/ && chmod 0755 /root/miner
 
 # Workaround GMiner not finding libnvml
