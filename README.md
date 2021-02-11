@@ -7,7 +7,7 @@ for [nvidia-docker].
 ## Build images
 
 ```
-git clone https://github.com/eLvErDe/docker-gminer
+git clone https://github.com/hashkingnet/docker-gminer
 cd docker-gminer
 docker build -t gminer .
 ```
